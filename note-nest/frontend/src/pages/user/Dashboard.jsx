@@ -42,12 +42,13 @@ const Dashboard = () => {
   const [selectedYear, setSelectedYear] = useState('');
   const [selectedSubject, setSelectedSubject] = useState('');
   const [selectedType, setSelectedType] = useState(''); // PDF or Video
+  const [pastPaperYear, setPastPaperYear] = useState(''); // Past papers
   const [selectedResource, setSelectedResource] = useState(null);
   const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
 
   const handleYearChange = (e) => {
     setSelectedYear(e.target.value);
-    setSelectedSubject('');
+    setSelectedSubject(''); // reset subject when year changes
   };
 
   const handlePreview = (resource) => {
@@ -67,7 +68,7 @@ const Dashboard = () => {
         <TopBar />
         <h2 className="text-xl font-semibold mb-4">Dashboard</h2>
 
-        {/* Upload Button + Title */}
+        {/* Upload Button */}
         <div className="flex justify-between items-center mb-4">
           <h3 className="font-semibold text-lg">Popular Resources</h3>
           <button
@@ -80,7 +81,7 @@ const Dashboard = () => {
 
         {/* Filters */}
         <div className="bg-white p-4 rounded-lg shadow-sm flex flex-wrap items-center gap-3 mb-6">
-          {/* Year filter */}
+          {/* Year */}
           <select
             className="border px-3 py-2 rounded text-sm"
             value={selectedYear}
@@ -92,7 +93,7 @@ const Dashboard = () => {
             ))}
           </select>
 
-          {/* Subject filter */}
+          {/* Subject */}
           <select
             className="border px-3 py-2 rounded text-sm"
             value={selectedSubject}
@@ -117,7 +118,7 @@ const Dashboard = () => {
             <option value="video">Video</option>
           </select>
 
-          {/* Search Input */}
+          {/* Search */}
           <input
             type="text"
             placeholder="Search by title..."
@@ -126,27 +127,37 @@ const Dashboard = () => {
             onChange={(e) => setSearchTerm(e.target.value)}
           />
 
-          {/* Sort (not implemented here yet) */}
+          {/* Past Papers */}
           <div className="ml-auto">
-            <label className="text-sm mr-2">Sort by:</label>
-            <select className="border px-3 py-2 rounded text-sm">
-              <option>Newest</option>
-              <option>Oldest</option>
+            <label className="text-sm mr-2">Past Papers:</label>
+            <select
+              className="border px-3 py-2 rounded text-sm"
+              value={pastPaperYear}
+              onChange={(e) => setPastPaperYear(e.target.value)}
+            >
+              <option value="">Select Year</option>
+              <option value="1">First Year</option>
+              <option value="2">Second Year</option>
+              <option value="3">Third Year</option>
+              <option value="4">Fourth Year</option>
             </select>
           </div>
         </div>
 
-        {/* Resource List */}
+        {/* Resources */}
         <UploadedResources
           searchTerm={searchTerm}
           selectedYear={selectedYear}
           selectedSubject={selectedSubject}
           selectedType={selectedType}
+          pastPaperYear={pastPaperYear}
           onPreview={handlePreview}
         />
 
         {/* Preview modal */}
-        {selectedResource && <PreviewPage resource={selectedResource} onClose={closePreview} />}
+        {selectedResource && (
+          <PreviewPage resource={selectedResource} onClose={closePreview} />
+        )}
 
         {/* Upload modal */}
         <UploadModal
