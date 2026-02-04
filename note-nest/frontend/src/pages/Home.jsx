@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import backgroundImg from "../assets/background.jpg";
+import whiteArrowIcon from "../assets/white_arrow_icon.svg"; // ← added here
 
 const Home = () => {
   const navigate = useNavigate();
@@ -50,6 +51,14 @@ const Home = () => {
           transform: translateY(-8px);
           box-shadow: 0 20px 35px rgba(0,0,0,0.08);
         }
+
+        .arrow-slide {
+          transition: transform 0.3s ease;
+        }
+
+        button:hover .arrow-slide {
+          transform: translateX(4px);
+        }
       `}</style>
 
       <div className="min-h-screen flex flex-col bg-gray-50">
@@ -59,7 +68,7 @@ const Home = () => {
           scrollToContact={() => scrollTo(contactRef)}
         />
 
-        {/* Hero – dark */}
+        {/* Hero */}
         <section className="relative pt-14 pb-20 md:pb-24 overflow-hidden">
           <div className="absolute inset-0">
             <img
@@ -86,12 +95,18 @@ const Home = () => {
               </p>
 
               <div className="mt-8 flex flex-col sm:flex-row justify-center gap-4 sm:gap-5">
+                {/* Shiny animated Get Started button with arrow */}
                 <div className="shine-bg rounded-full p-0.5 hover:scale-105 transition duration-300 active:scale-100 shadow-lg">
                   <button
                     onClick={handleGetStarted}
-                    className="px-9 py-3.5 text-sm md:text-base font-medium text-white bg-gray-900 rounded-full min-w-[200px]"
+                    className="px-9 py-3.5 text-sm md:text-base font-medium text-white bg-gray-900 rounded-full min-w-[220px] flex items-center justify-center gap-2.5 group"
                   >
-                    Get Started
+                    Get Started 
+                    <img
+                      src={whiteArrowIcon}
+                      alt="Arrow"
+                      className="w-4 h-4 arrow-slide"
+                    />
                   </button>
                 </div>
 
@@ -106,7 +121,7 @@ const Home = () => {
           </div>
         </section>
 
-        {/* Why NoteNest Matters – light */}
+        {/* Why NoteNest Matters */}
         <section ref={aboutRef} className="py-14 bg-white scroll-mt-20">
           <div className="max-w-7xl mx-auto px-6 lg:px-10">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 text-center mb-10">
@@ -136,7 +151,7 @@ const Home = () => {
           </div>
         </section>
 
-        {/* Built for Students – light gray */}
+        {/* Built for Students */}
         <section className="py-14 bg-gray-50">
           <div className="max-w-7xl mx-auto px-6 lg:px-10">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 text-center mb-10">
@@ -165,7 +180,7 @@ const Home = () => {
           </div>
         </section>
 
-        {/* Platform Features – white */}
+        {/* Platform Features */}
         <section ref={featuresRef} className="py-14 bg-white scroll-mt-20">
           <div className="max-w-7xl mx-auto px-6 lg:px-10">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 text-center mb-10">
@@ -194,7 +209,7 @@ const Home = () => {
           </div>
         </section>
 
-        {/* Get in Touch – light gray */}
+        {/* Get in Touch */}
         <section ref={contactRef} className="py-14 bg-gray-50 scroll-mt-20">
           <div className="max-w-6xl mx-auto px-6 lg:px-10">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 text-center mb-10">
